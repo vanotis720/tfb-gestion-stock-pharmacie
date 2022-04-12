@@ -19,7 +19,7 @@ class UserController extends Controller
             'name' => 'root admin',
             'email' => 'root@admin.tech',
             'avatar' => 'assets/img/faces/undraw_profile.svg',
-            'password' => bcrypt(12345678),
+            'password' => bcrypt(123456789),
             'created_at' => date('Y-m-d H:i:s'),
         ];
         User::create($request);

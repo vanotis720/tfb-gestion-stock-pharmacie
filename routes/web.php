@@ -23,20 +23,13 @@ Route::get('login', function () {
 
 Route::post('login', [UserController::class, 'login'])->name('login.post');
 
-
 Route::get('signin', [UserController::class, 'signin'])->name('signin'); //to remove
 
 Route::middleware('auth')->group(
     function () {
 
         Route::get('/', [DashboardController::class, 'home']);
-
-        Route::get('contacts', [ContactController::class, 'index'])->name('contacts');
-        Route::get('contacts/{id}/action/{action}', [ContactController::class, 'update'])->name('contact.action');
-
-        Route::get('applications', [ApplicantController::class, 'index'])->name('applicants');
-        Route::get('applications/{id}/action/{action}', [ApplicantController::class, 'update'])->name('applicant.action');
-
+        
         Route::get('account', [UserController::class, 'show'])->name('account');
 
         Route::get('logout', [UserController::class, 'logout'])->name('logout');

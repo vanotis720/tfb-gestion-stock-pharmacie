@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Authentification - Light Of The World DashBoard</title>
+    <title>Authentification - Gestion de stock Pharmacie</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <style>
@@ -115,7 +115,7 @@
         <div class="logo">
             <img src="{{ asset('assets/img/logo/logo-circle.png') }}" alt="">
         </div>
-        <div class="text-center mt-4 name"> Light Of The World DashBoard </div>
+        <div class="text-center mt-4 name"> Gestion de stock Pharmacie</div>
         @if (session('error'))
             <div class="alert alert-danger text-center msg" id="error">
                 <strong>{{ session('error') }}</strong>
