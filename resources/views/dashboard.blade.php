@@ -15,7 +15,8 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Applications</p>
-                                    <p class="card-title">{{ App\Models\Applicant::count() }}
+                                    <p class="card-title">
+                                        {{-- {{ App\Models\Applicant::count() }} --}}
                                     <p>
                                 </div>
                             </div>
@@ -42,7 +43,8 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Contacts</p>
-                                    <p class="card-title">{{ App\Models\Contact::count() }}
+                                    <p class="card-title">
+                                        {{-- {{ App\Models\Contact::count() }} --}}
                                     <p>
                                 </div>
                             </div>
@@ -103,9 +105,9 @@
             </div>
         </div>
     </div>
-    <script>
+    {{-- <script>
         var contact_init = {{ App\Models\Contact::count('init') }};
         var contact_treated = {{ App\Models\Contact::count('treated') }};
         var applications = {{ json_encode(App\Models\Applicant::statsMonth()) }}
-    </script>
+    </script> --}}
 @endsection

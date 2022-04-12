@@ -20,20 +20,9 @@
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li class="{{ Request::is('applications') ? 'active' : '' }}">
-                <a href="{{ route('applicants') }}">
-                    <i class="nc-icon nc-spaceship"></i>
-                    <p>Applications</p>
-                </a>
-            </li>
-            <li class="{{ Request::is('contacts') ? 'active' : '' }}">
-                <a href="{{ route('contacts') }}">
-                    <i class="nc-icon nc-pin-3"></i>
-                    <p>Contacts</p>
-                </a>
-            </li>
+            
             <li class="{{ Request::is('account') ? 'active' : '' }}">
-                <a href="{{ url('account') }}">
+                <a href="{{ route('account') }}">
                     <i class="nc-icon nc-single-02"></i>
                     <p>Mon Profil</p>
                 </a>

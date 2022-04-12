@@ -27,28 +27,41 @@
             <div class="col-md-8">
                 <div class="card card-user">
                     <div class="card-header">
-                        <h5 class="card-title">Editer Profile</h5>
+                        <h5 class="card-title">Editer Mon Profil</h5>
                     </div>
                     <div class="card-body">
-                        <form>
+                        @if (session('success'))
+                            <div class="alert alert-success text-center msg" id="error">
+                                <strong>{{ session('success') }}</strong>
+                            </div>
+                        @endif
+                        @if (session('alert'))
+                            <div class="alert alert-info text-center msg" id="error">
+                                <strong>{{ session('info') }}</strong>
+                            </div>
+                        @endif
+                        <form method="POST" action="{{ route('account.update') }}">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-5 pr-1">
                                     <div class="form-group">
                                         <label>Entreprise (disabled)</label>
                                         <input type="text" class="form-control" disabled="" placeholder="Entreprise"
-                                            value="Light of the World">
+                                            value="Fac.Sciences">
                                     </div>
                                 </div>
                                 <div class="col-md-3 px-1">
                                     <div class="form-group">
                                         <label>Nom d'utilisateur</label>
-                                        <input type="text" class="form-control" name="name" placeholder="Votre nom" value="{{ $user->name }}">
+                                        <input type="text" class="form-control" name="name" placeholder="Votre nom"
+                                            value="{{ $user->name }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4 pl-1">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Adresse E-mail</label>
-                                        <input type="email" class="form-control" name="email" placeholder="Email" value="{{ $user->email }}">
+                                        <input type="email" class="form-control" name="email" placeholder="Email"
+                                            value="{{ $user->email }}">
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +69,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Mot de passe</label>
-                                        <input type="password" name="password" class="form-control" placeholder="Laissez vide pour garder le mot de passe actuel">
+                                        <input type="password" name="password" class="form-control"
+                                            placeholder="Laissez vide pour garder le mot de passe actuel" autocomplete="false">
                                     </div>
                                 </div>
                             </div>

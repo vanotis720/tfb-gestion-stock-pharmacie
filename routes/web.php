@@ -29,9 +29,11 @@ Route::middleware('auth')->group(
     function () {
 
         Route::get('/', [DashboardController::class, 'home']);
-        
+
         Route::get('account', [UserController::class, 'show'])->name('account');
 
         Route::get('logout', [UserController::class, 'logout'])->name('logout');
+
+        Route::post('account/update', [UserController::class, 'update'])->name('account.update');
     }
 );

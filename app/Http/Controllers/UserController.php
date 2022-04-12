@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -55,6 +56,28 @@ class UserController extends Controller
     {
         $user = User::find(auth()->user()->id);
         return view('profil', compact('user'));
+    }
+
+    public function update(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+        ]);
+
+        try {
+            $user = User::findOrFail(auth()->user()->id);
+            if ($request->password) {
+                $user->password = Hash::make($request->password);
+            }
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->update();
+
+            return redirect()->back()->withSuccess('Votre profil a été changé avec succès');
+        } catch (\Throwable $th) {
+            return redirect()->back()->withAlert('une erreur s\'est produite, veuillez reessayer!');
+        }
     }
 
     public function logout(Request $request)
