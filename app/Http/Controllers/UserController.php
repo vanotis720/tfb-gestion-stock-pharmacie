@@ -43,7 +43,7 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        if($user) {
+        if ($user) {
             return redirect()->route('users.list')->withSuccess('Utilisateur ajouté avec success');
         }
         return redirect()->back()->withInput($request->only('email'))->withError('Une erreur s\'est produite, veuillez reessayer');
@@ -83,9 +83,13 @@ class UserController extends Controller
         }
     }
 
-    public function logout(Request $request)
+    public function destroy($id)
     {
-        Auth::logout();
-        return redirect('login')->withSuccess('Deconnection reussi! A la prochaine!');
+        $user = User::find($id);
+
+        if ($user->delete()) {
+            return redirect()->back()->withSuccess('L\'utilisateur a été supprimé');
+        }
+        return redirect()->back()->withError('une erreur s\'est produite, veuillez reessayer!');
     }
 }

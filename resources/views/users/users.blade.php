@@ -18,49 +18,63 @@
                                 <strong>{{ session('success') }}</strong>
                             </div>
                         @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger text-center msg" id="error">
+                                <strong>{{ session('error') }}</strong>
+                            </div>
+                        @endif
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead class=" text-primary">
-                                    <th>
+                                    <th class="text-center">
+                                        #
+                                    </th>
+                                    <th class="text-center">
                                         Nom complet
                                     </th>
-                                    <th>
+                                    <th class="text-center">
                                         Email
                                     </th>
-                                    <th>
+                                    <th class="text-center">
                                         Role
                                     </th>
                                     <th class="text-center">
                                         Avatar
                                     </th>
-                                    {{-- <th class="text-center">
+                                    <th class="text-center">
                                         Action
-                                    </th> --}}
+                                    </th>
                                 </thead>
                                 <tbody>
+                                    <?php $i = 0; ?>
                                     @foreach ($users as $user)
                                         <tr>
+                                            <td class="text-center">
+                                                {{ ++$i }}
+                                            </td>
                                             <td class="text-capitalize">
                                                 {{ $user->name }}
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 {{ $user->email }}
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 {{ $user->role }}
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <img class="avatar border-gray" src="{{ asset($user->avatar) }}"
                                                     alt="avatar user">
-                                                {{-- </td>
+                                            </td>
                                             <td class="text-center">
-                                                <a target="_blank"
-                                                    href=""
-                                                    class="btn btn-round btn-success">
-                                                    Modifier
-                                                    <i class="nc-icon nc-send"></i>
-                                                </a>
-                                            </td> --}}
+                                                @if ($user->id == auth()->user()->id)
+                                                    <i class="nc-icon nc-check-2"></i>
+                                                @else
+                                                    <a target="_blank" href="{{ route('users.destroy', $user->id) }}"
+                                                        class="btn btn-danger">
+                                                        <i class="nc-icon nc-simple-remove"></i>
+                                                    </a>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

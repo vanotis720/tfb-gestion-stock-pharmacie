@@ -20,7 +20,7 @@
 
             {{-- admin specific action --}}
             @if (auth()->user()->role == 'admin')
-                <li class="{{ Request::is('users') ? 'active' : '' }}">
+                <li class="{{ Request::is('user*') ? 'active' : '' }}">
                     <a href="{{ route('users.list') }}">
                         <i class="nc-icon nc-badge"></i>
                         <p>Gestion des utilisateurs</p>
