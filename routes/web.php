@@ -22,9 +22,9 @@ Route::get('login', function () {
     return view('auth.login');
 })->name('login');
 
-Route::post('login', [UserController::class, 'login'])->name('login.post');
+Route::post('login', [AuthController::class, 'login'])->name('login.post');
 
-Route::get('signin', [UserController::class, 'signin'])->name('signin'); //to remove
+Route::get('signin', [AuthController::class, 'signin'])->name('signin'); //to remove
 
 Route::middleware('auth')->group(
     function () {
@@ -42,7 +42,5 @@ Route::middleware('auth')->group(
         Route::get('user', [UserController::class, 'create'])->name('users.create');
         Route::post('user', [UserController::class, 'store'])->name('users.store');
         Route::get('user/{id}/delete', [UserController::class, 'destroy'])->name('users.destroy');
-
-
     }
 );
