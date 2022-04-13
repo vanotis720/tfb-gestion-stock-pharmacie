@@ -18,6 +18,16 @@
                 </a>
             </li>
 
+            {{-- admin specific action --}}
+            @if (auth()->user()->role == 'admin')
+                <li class="{{ Request::is('users') ? 'active' : '' }}">
+                    <a href="{{ route('users.list') }}">
+                        <i class="nc-icon nc-badge"></i>
+                        <p>Gestion des utilisateurs</p>
+                    </a>
+                </li>
+            @endif
+
             <li class="{{ Request::is('account') ? 'active' : '' }}">
                 <a href="{{ route('account') }}">
                     <i class="nc-icon nc-single-02"></i>

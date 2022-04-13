@@ -7,17 +7,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+class AuthController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function signin()
     {
-        $users = User::all();
-        return view('users.users', compact('users'));
+        $request = [
+            'name' => 'root admin',
+            'email' => 'root@admin.tech',
+            'avatar' => 'assets/img/faces/undraw_profile.svg',
+            'password' => bcrypt(123456789),
+            'created_at' => date('Y-m-d H:i:s'),
+        ];
+        User::create($request);
+
+        return redirect()->route('login');
     }
 
 
