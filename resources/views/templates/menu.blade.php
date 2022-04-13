@@ -28,6 +28,14 @@
                 </li>
             @endif
 
+            <li class="{{ Request::is('fiche*') ? 'active' : '' }}">
+                <a href="{{ route('fiches.list') }}">
+                    <i class="nc-icon nc-cart-simple"></i>
+                    <p>Demande d'approvisionnement</p>
+                </a>
+            </li>
+            
+
             <li class="{{ Request::is('account') ? 'active' : '' }}">
                 <a href="{{ route('account') }}">
                     <i class="nc-icon nc-single-02"></i>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FicheController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\DashboardController;
@@ -42,5 +43,11 @@ Route::middleware('auth')->group(
         Route::get('user', [UserController::class, 'create'])->name('users.create');
         Route::post('user', [UserController::class, 'store'])->name('users.store');
         Route::get('user/{id}/delete', [UserController::class, 'destroy'])->name('users.destroy');
+
+
+        Route::get('fiches', [FicheController::class, 'index'])->name('fiches.list');
+        Route::get('fiche/{id}', [FicheController::class, 'show'])->name('fiches.detail');
+
+
     }
 );
