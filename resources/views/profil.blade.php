@@ -18,8 +18,12 @@
                                 {{ $user->email }}
                             </p>
                         </div>
-                        <p class="description text-center">
-                            Membre depuis {{ $user->created_at }}
+                        <p class="description text-center text-uppercase">
+                            @if ($user->role == 'pharmacist')
+                                Pharmacien
+                            @else
+                                {{ $user->role }}
+                            @endif
                         </p>
                     </div>
                 </div>
