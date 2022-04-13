@@ -49,40 +49,6 @@ class UserController extends Controller
         return redirect()->back()->withInput($request->only('email'))->withError('Une erreur s\'est produite, veuillez reessayer');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show()
-    {
-        $user = User::find(auth()->user()->id);
-        return view('profil', compact('user'));
-    }
-
-    public function update(Request $request)
-    {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-        ]);
-
-        try {
-            $user = User::findOrFail(auth()->user()->id);
-            if ($request->password) {
-                $user->password = Hash::make($request->password);
-            }
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->update();
-
-            return redirect()->back()->withSuccess('Votre profil a été changé avec succès');
-        } catch (\Throwable $th) {
-            return redirect()->back()->withAlert('une erreur s\'est produite, veuillez reessayer!');
-        }
-    }
-
     public function destroy($id)
     {
         $user = User::find($id);
