@@ -7,6 +7,7 @@ use App\Http\Controllers\FicheController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProduitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,9 +45,12 @@ Route::middleware('auth')->group(
         Route::post('user', [UserController::class, 'store'])->name('users.store');
         Route::get('user/{id}/delete', [UserController::class, 'destroy'])->name('users.destroy');
 
-
         Route::get('fiches', [FicheController::class, 'index'])->name('fiches.list');
         Route::get('fiche/{id}/detail', [FicheController::class, 'show'])->name('fiche.detail');
-        Route::get('fiche', [FicheController::class, 'create'])->name('fiche.create');
+        Route::get('fiche/{id?}', [FicheController::class, 'create'])->name('fiche.create');
+        Route::get('fiche/{id}/update', [FicheController::class, 'update'])->name('fiche.update');
+
+        Route::post('product', [ProduitController::class, 'store'])->name('product.store');
+        Route::get('product/{id}/fiche/{fiche}/delete', [ProduitController::class, 'destroy'])->name('product.destroy');
     }
 );

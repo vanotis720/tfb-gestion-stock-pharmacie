@@ -69,7 +69,7 @@
                                                 @if ($user->id == auth()->user()->id)
                                                     <i class="nc-icon nc-check-2"></i>
                                                 @else
-                                                    <a target="_blank" href="{{ route('users.destroy', $user->id) }}"
+                                                    <a href="{{ route('users.destroy', $user->id) }}"
                                                         class="btn btn-danger">
                                                         <i class="nc-icon nc-simple-remove"></i>
                                                     </a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fiche;
+use App\Models\Produit;
 use Illuminate\Http\Request;
 
 class FicheController extends Controller
@@ -14,7 +15,7 @@ class FicheController extends Controller
      */
     public function index()
     {
-        $fiches = Fiche::where('status','!=', 'init');
+        $fiches = Fiche::where('status', '!=', 'init')->get();
         return view('fiches.fiches', compact('fiches'));
     }
 
@@ -23,12 +24,16 @@ class FicheController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($fiche = null)
     {
-        // init a fiche
-
-        $fiche = $this->initForm();
-        return view('fiches.add', compact('fiche'));
+        $produits = [];
+        if ($fiche) {
+            $fiche = Fiche::find($fiche);
+            $produits = Produit::where('fiches_id', $fiche->id)->get();
+        } else {
+            $fiche = $this->initForm();
+        }
+        return view('fiches.add', compact('fiche', 'produits'));
     }
 
     /**
@@ -72,9 +77,14 @@ class FicheController extends Controller
      * @param  \App\Models\Fiche  $fiche
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Fiche $fiche)
+    public function update($id)
     {
-        //
+        $fiche = Fiche::find($id);
+        $fiche->status = 'admin';
+        if($fiche->update()) {
+            return redirect()->route('fiches.list')->withSuccess('La fiche a été soumis avec succès');
+        }
+        return redirect()->route('fiche.create', $fiche->id)->withAlert('une erreur s\'est produite, veuillez reessayer!');
     }
 
     /**
@@ -101,7 +111,7 @@ class FicheController extends Controller
     {
         $code = rand(10, 10000);
 
-        if(Fiche::find('FC-'.$code)) {
+        if (Fiche::find('FC-' . $code)) {
             $code = rand(10, 10000);
         }
         return 'FC-' . $code;
