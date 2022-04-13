@@ -88,6 +88,16 @@ class FicheController extends Controller
         return redirect()->route('fiche.create', $fiche->id)->withAlert('une erreur s\'est produite, veuillez reessayer!');
     }
 
+    public function action($id, $action)
+    {
+        $fiche = Fiche::find($id);
+        $fiche->status = $action;
+        if ($fiche->update()) {
+            return redirect()->route('fiches.list')->withSuccess('L\'action a été effectuer avec succès');
+        }
+        return redirect()->route('fiche.detail', $fiche->id)->withAlert('une erreur s\'est produite, veuillez reessayer!');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

@@ -49,6 +49,7 @@ Route::middleware('auth')->group(
         Route::get('fiche/{id}/detail', [FicheController::class, 'show'])->name('fiche.detail');
         Route::get('fiche/{id?}', [FicheController::class, 'create'])->name('fiche.create');
         Route::get('fiche/{id}/update', [FicheController::class, 'update'])->name('fiche.update');
+        Route::get('fiche/{id}/action/{action}', [FicheController::class, 'action'])->name('fiche.action');
 
         Route::post('product', [ProduitController::class, 'store'])->name('product.store');
         Route::get('product/{id}/fiche/{fiche}/delete', [ProduitController::class, 'destroy'])->name('product.destroy');

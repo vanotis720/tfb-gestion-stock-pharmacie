@@ -6,10 +6,16 @@
             <div class="col-md-12">
                 <div class="card card-user">
                     <div class="card-header">
-                        <h5 class="card-title">Détail Fiche no: {{ $fiche->no_fiche }}</h5>
+                        <h5 class="card-title float-left">Détail Fiche no: {{ $fiche->no_fiche }}</h5>
+                        @include('fiches.action')
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
+                            @if (session('error'))
+                                <div class="alert alert-danger text-center msg" id="error">
+                                    <strong>{{ session('error') }}</strong>
+                                </div>
+                            @endif
                             <table class="table table-bordered">
                                 <tbody>
                                     <tr>
