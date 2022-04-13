@@ -59,6 +59,11 @@
                                         <label>Nom d'utilisateur</label>
                                         <input type="text" class="form-control" name="name" placeholder="Votre nom"
                                             value="{{ $user->name }}">
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4 pl-1">
@@ -66,6 +71,11 @@
                                         <label for="exampleInputEmail1">Adresse E-mail</label>
                                         <input type="email" class="form-control" name="email" placeholder="Email"
                                             value="{{ $user->email }}">
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +84,13 @@
                                     <div class="form-group">
                                         <label>Mot de passe</label>
                                         <input type="password" name="password" class="form-control"
-                                            placeholder="Laissez vide pour garder le mot de passe actuel" autocomplete="false">
+                                            placeholder="Laissez vide pour garder le mot de passe actuel"
+                                            autocomplete="false">
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
