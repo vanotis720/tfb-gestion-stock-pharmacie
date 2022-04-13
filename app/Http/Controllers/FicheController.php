@@ -14,7 +14,7 @@ class FicheController extends Controller
      */
     public function index()
     {
-        $fiches = Fiche::all();
+        $fiches = Fiche::where('status','!=', 'init');
         return view('fiches.fiches', compact('fiches'));
     }
 
@@ -25,7 +25,10 @@ class FicheController extends Controller
      */
     public function create()
     {
-        //
+        // init a fiche
+
+        $fiche = $this->initForm();
+        return view('fiches.add', compact('fiche'));
     }
 
     /**
@@ -83,5 +86,24 @@ class FicheController extends Controller
     public function destroy(Fiche $fiche)
     {
         //
+    }
+
+    private function initForm()
+    {
+        return Fiche::create([
+            'users_id' => auth()->user()->id,
+            'status' => 'init',
+            'no_fiche' => $this->generateCode(),
+        ]);
+    }
+
+    private function generateCode()
+    {
+        $code = rand(10, 10000);
+
+        if(Fiche::find('FC-'.$code)) {
+            $code = rand(10, 10000);
+        }
+        return 'FC-' . $code;
     }
 }

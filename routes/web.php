@@ -46,8 +46,7 @@ Route::middleware('auth')->group(
 
 
         Route::get('fiches', [FicheController::class, 'index'])->name('fiches.list');
-        Route::get('fiche/{id}', [FicheController::class, 'show'])->name('fiches.detail');
-
-
+        Route::get('fiche/{id}/detail', [FicheController::class, 'show'])->name('fiche.detail');
+        Route::get('fiche', [FicheController::class, 'create'])->name('fiche.create');
     }
 );

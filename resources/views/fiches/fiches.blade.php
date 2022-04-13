@@ -7,10 +7,12 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title float-left">Fiche d'approvisionnement</h4>
-                        <a href="{{ route('users.create') }}" class="btn btn-round btn-success float-right">
-                            Nouveau demande
-                            <i class="nc-icon nc-simple-add"></i>
-                        </a>
+                        @if (auth()->user()->role == 'pharmacist')
+                            <a href="{{ route('fiche.create') }}" class="btn btn-round btn-success float-right">
+                                Nouvelle demande
+                                <i class="nc-icon nc-simple-add"></i>
+                            </a>
+                        @endif
                     </div>
                     <div class="card-body">
                         @if (session('success'))
@@ -52,7 +54,7 @@
                                                 {{ $fiche->status }}
                                             </td>
                                             <td class="text-center">
-                                                <a target="_blank" href="{{ route('fiches.detail', $fiche->id) }}"
+                                                <a target="_blank" href="{{ route('fiche.detail', $fiche->id) }}"
                                                     class="btn btn-info">
                                                     Details
                                                     <i class="nc-icon nc-single-copy-04"></i>

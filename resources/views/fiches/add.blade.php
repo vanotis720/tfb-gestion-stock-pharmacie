@@ -3,10 +3,10 @@
 @section('content')
     <div class="content">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-4">
                 <div class="card card-user">
                     <div class="card-header">
-                        <h5 class="card-title">Renseigner les informations</h5>
+                        <h5 class="card-title">Ajouter les produits</h5>
                     </div>
                     <div class="card-body">
                         @if (session('error'))
@@ -17,40 +17,12 @@
                         <form method="POST" action="{{ route('users.store') }}">
                             @csrf
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Nom de l'utilisateur</label>
+                                        <label>Nom du produit</label>
                                         <input type="text" class="form-control" name="name"
-                                            placeholder="Renseigner le nom" value="{{ old('name') }}" required>
+                                            placeholder="Renseigner le nom du produit" value="{{ old('name') }}" required>
                                         @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Adresse E-mail</label>
-                                        <input type="email" class="form-control" name="email"
-                                            placeholder="Renseigner l'adresse Email" value="{{ old('email') }}" required>
-                                        @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-3 pr-1">
-                                    <div class="form-group">
-                                        <label>Role</label>
-                                        <select name="role" id="role" class="form-control" required>
-                                            <option selected disabled>Choisir un role</option>
-                                            <option value="admin">Administration</option>
-                                            <option value="caisse">Caisse</option>
-                                            <option value="pharmacist">Pharmacie</option>
-                                        </select>
-                                        @error('role')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -61,9 +33,37 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Mot de passe</label>
+                                        <label for="exampleInputEmail1">Catégorie du produit</label>
+                                        <input type="email" class="form-control" name="email"
+                                            placeholder="Renseigner la catégorie du produit" value="{{ old('email') }}" required>
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Condition du produit</label>
                                         <input type="password" name="password" class="form-control"
-                                            placeholder="Renseigner le mot de passe" autocomplete="false">
+                                            placeholder="Renseigner la condition du produit" autocomplete="false">
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Quantité a commander</label>
+                                        <input type="password" name="password" class="form-control"
+                                            placeholder="Renseigner la quantité" autocomplete="false">
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -74,10 +74,59 @@
                             </div>
                             <div class="row">
                                 <div class="update ml-auto mr-auto">
-                                    <button type="submit" class="btn btn-primary btn-round">Valider et ajouter</button>
+                                    <button type="submit" class="btn btn-primary btn-round">Ajouter et
+                                        continuer</button>
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card card-user">
+                    <div class="card-header">
+                        <h5 class="card-title">Detail Fiche</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td>Num. Fiche</td>
+                                        <td>{{ $fiche->no_fiche }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Statuts</td>
+                                        <td>{{ $fiche->status }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h4>Produits</h4>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <th>Produit</th>
+                                    <th>Categorie</th>
+                                    <th>Condition</th>
+                                    <th>Quantite</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ $fiche->no_fiche }}</td>
+                                        <td>{{ $fiche->no_fiche }}</td>
+                                        <td>{{ $fiche->no_fiche }}</td>
+                                        <td>{{ $fiche->no_fiche }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                                <div class="update ml-auto mr-auto">
+                                    <button type="submit" class="btn btn-warning btn-round">
+                                        Valider la fiche
+                                    </button>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>

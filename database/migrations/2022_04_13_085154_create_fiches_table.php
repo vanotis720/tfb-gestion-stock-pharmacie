@@ -17,7 +17,7 @@ class CreateFichesTable extends Migration
             $table->id();
             $table->foreignId('users_id')->constrained();
             $table->string('no_fiche');
-            $table->enum('status', ['init','admin','caisse','solved','rejected']);
+            $table->enum('status', ['init','pharmacist','admin','caisse','solved','validated','rejected']);
             $table->timestamps();
         });
     }
