@@ -20,22 +20,33 @@ class UserController extends Controller
         return view('users.users', compact('users'));
     }
 
+    public function create()
+    {
+        return view('users.add');
+    }
 
-    public function login(Request $request)
+
+    public function store(Request $request)
     {
         $request->validate([
+            'name' => 'required',
             'email' => 'required',
+            'role' => 'required',
             'password' => 'required'
         ]);
 
-        $credential = ['email' => $request->email, 'password' => $request->password];
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->role,
+            'avatar' => 'assets/img/faces/undraw_profile.svg',
+            'password' => bcrypt($request->password),
+        ]);
 
-        if (Auth::attempt($credential)) {
-            $request->session()->regenerate();
-            return redirect('/');
+        if($user) {
+            return redirect()->route('users.list')->withSuccess('Utilisateur ajouté avec success');
         }
-
-        return redirect()->back()->withInput($request->only('email'))->withError('Les informations d\'identification fournies ne correspondent pas à nos enregistrements.');
+        return redirect()->back()->withInput($request->only('email'))->withError('Une erreur s\'est produite, veuillez reessayer');
     }
 
     /**

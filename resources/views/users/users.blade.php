@@ -6,9 +6,18 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Liste des utilisateurs</h4>
+                        <h4 class="card-title float-left">Liste des utilisateurs</h4>
+                        <a href="{{ route('users.create') }}" class="btn btn-round btn-success float-right">
+                            Ajouter un utilisateur
+                            <i class="nc-icon nc-simple-add"></i>
+                        </a>
                     </div>
                     <div class="card-body">
+                        @if (session('success'))
+                            <div class="alert alert-success text-center msg" id="error">
+                                <strong>{{ session('success') }}</strong>
+                            </div>
+                        @endif
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead class=" text-primary">
@@ -43,7 +52,7 @@
                                             <td>
                                                 <img class="avatar border-gray" src="{{ asset($user->avatar) }}"
                                                     alt="avatar user">
-                                            {{-- </td>
+                                                {{-- </td>
                                             <td class="text-center">
                                                 <a target="_blank"
                                                     href=""
