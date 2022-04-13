@@ -4,46 +4,77 @@
     <div class="content">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card card-user">
                     <div class="card-header">
-                        <h4 class="card-title">Fiche no: {{ $fiche->no_fiche }}</h4>
+                        <h5 class="card-title">Détail Fiche no: {{ $fiche->no_fiche }}</h5>
                     </div>
                     <div class="card-body">
-                        @if (session('success'))
-                            <div class="alert alert-success text-center msg" id="error">
-                                <strong>{{ session('success') }}</strong>
-                            </div>
-                        @endif
-                        @if (session('error'))
-                            <div class="alert alert-danger text-center msg" id="error">
-                                <strong>{{ session('error') }}</strong>
-                            </div>
-                        @endif
                         <div class="table-responsive">
                             <table class="table table-bordered">
-                                <thead class=" text-primary">
-                                    <th class="text-center">
-                                        #
-                                    </th>
-                                    <th class="text-center">
-                                        Demander Par
-                                    </th>
-                                    <th class="text-center">
-                                        Status
-                                    </th>
-                                </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="text-center">
-                                            {{ $fiche->no_fiche }}
-                                        </td>
-                                        <td class="text-capitalize">
-                                            {{ App\Models\User::getName($fiche->users_id) }}
-                                        </td>
-                                        <td class="text-center">
-                                            {{ $fiche->status }}
+                                        <td class="font-weight-bold text-capitalize">Num. Fiche</td>
+                                        <td>{{ $fiche->no_fiche }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bold text-capitalize">Demander Par</td>
+                                        <td class="text-capitalize">{{ App\Models\User::getName($fiche->users_id) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bold text-capitalize">Statuts</td>
+                                        <td>
+                                            @if ($fiche->status == 'admin')
+                                                <h6>
+                                                    <span class="badge badge-warning"> En attente de
+                                                        l'administrateur</span>
+                                                </h6>
+                                            @elseif ($fiche->status == 'caisse')
+                                                <h6>
+                                                    <span class="badge badge-warning"> En attente de la caisse</span>
+                                                </h6>
+                                            @elseif ($fiche->status == 'pharmacist')
+                                                <h6>
+                                                    <span class="badge badge-warning"> En attente du pharmacien</span>
+                                                </h6>
+                                            @elseif ($fiche->status == 'solved')
+                                                <h6>
+                                                    <span class="badge badge-warning"> Acheter, en attende de
+                                                        validation</span>
+                                                </h6>
+                                            @elseif ($fiche->status == 'validated')
+                                                <h6>
+                                                    <span class="badge badge-success"> Valider, Ajouter au stock</span>
+                                                </h6>
+                                            @elseif ($fiche->status == 'rejected')
+                                                <h6>
+                                                    <span class="badge badge-danger"> Demande refuser</span>
+                                                </h6>
+                                            @endif
                                         </td>
                                     </tr>
+                                </tbody>
+                            </table>
+
+                            <h4>Produits</h4>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <th>Produit</th>
+                                    <th>Categorie</th>
+                                    <th>Condition</th>
+                                    <th>Quantite</th>
+                                </thead>
+                                <tbody>
+                                    @foreach ($products as $produit)
+                                        <tr>
+                                            <td class="font-weight-bold text-capitalize"
+                                                style="word-wrap: break-word;min-width: 60px;max-width: 60px;">
+                                                {{ $produit->nom }}
+                                            </td>
+                                            <td>{{ $produit->categorie }}</td>
+                                            <td>{{ $produit->condition }}</td>
+                                            <td>{{ $produit->quantite }}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

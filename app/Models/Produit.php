@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Produit extends Model
 {
@@ -16,4 +17,10 @@ class Produit extends Model
         'quantite',
         'fiches_id',
     ];
+
+    public static function getByFiche($fiche)
+    {
+        $products = DB::table('produits')->where('fiches_id', $fiche)->orderBy('created_at')->get();
+        return $products;
+    }
 }

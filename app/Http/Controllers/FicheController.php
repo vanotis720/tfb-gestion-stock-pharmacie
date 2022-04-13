@@ -15,7 +15,7 @@ class FicheController extends Controller
      */
     public function index()
     {
-        $fiches = Fiche::where('status', '!=', 'init')->get();
+        $fiches = Fiche::where('status', '!=', 'init')->orderBy('created_at')->get();
         return view('fiches.fiches', compact('fiches'));
     }
 
@@ -56,7 +56,8 @@ class FicheController extends Controller
     public function show($id)
     {
         $fiche = Fiche::find($id);
-        return view('fiches.fiche-detail', compact('fiche'));
+        $products = Produit::getByFiche($id);
+        return view('fiches.fiche-detail', compact('fiche', 'products'));
     }
 
     /**
