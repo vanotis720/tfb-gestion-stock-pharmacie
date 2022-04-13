@@ -2,14 +2,11 @@
     <div class="logo">
         <a href="{{ url('/') }}" class="simple-text logo-mini">
             <div class="logo-image-small">
-                <img src="{{ asset('assets/img/logo/logo-circle.png') }}">
+                <img src="{{ asset('assets/img/faces/undraw_profile.svg') }}">
             </div>
         </a>
         <a href="{{ url('/') }}" class="simple-text logo-normal">
-            {{-- Light of the World --}}
-            <div class="logo-image-big">
-                <img src="{{ asset('assets/img/logo/logo.png') }}">
-            </div>
+            Gestion de stock
         </a>
     </div>
     <div class="sidebar-wrapper">
@@ -20,7 +17,7 @@
                     <p>Dashboard</p>
                 </a>
             </li>
-            
+
             <li class="{{ Request::is('account') ? 'active' : '' }}">
                 <a href="{{ route('account') }}">
                     <i class="nc-icon nc-single-02"></i>

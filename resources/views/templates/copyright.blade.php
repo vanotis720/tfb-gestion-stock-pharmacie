@@ -9,7 +9,7 @@
             </nav>
             <div class="credits ml-auto">
                 <span class="copyright">
-                    © {{ date('Y') }} Light of the World
+                    © {{ date('Y') }} Gestion de stock Pharmacie
                 </span>
             </div>
         </div>

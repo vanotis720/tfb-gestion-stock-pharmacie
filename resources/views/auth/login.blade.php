@@ -113,7 +113,7 @@
 <body>
     <div class="wrapper">
         <div class="logo">
-            <img src="{{ asset('assets/img/logo/logo-circle.png') }}" alt="">
+            <img src="{{ asset('assets/img/faces/undraw_profile.svg') }}" alt="">
         </div>
         <div class="text-center mt-4 name"> Gestion de stock Pharmacie</div>
         @if (session('error'))
