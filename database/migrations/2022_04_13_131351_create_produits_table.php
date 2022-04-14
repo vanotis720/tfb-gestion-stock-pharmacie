@@ -18,7 +18,7 @@ class CreateProduitsTable extends Migration
             $table->string('nom');
             $table->string('categorie');
             $table->string('condition');
-            $table->string('quantite');
+            $table->integer('quantite');
             $table->foreignId('fiches_id')->constrained();
             $table->timestamps();
         });
