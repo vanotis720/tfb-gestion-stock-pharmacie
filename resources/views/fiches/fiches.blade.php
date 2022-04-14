@@ -37,6 +37,9 @@
                                     <th class="text-center">
                                         Status
                                     </th>
+                                    <th>
+                                        Prix Total(CDF)
+                                    </th>
                                     <th class="text-center">
                                         Action
                                     </th>
@@ -79,6 +82,9 @@
                                                     </h6>
                                                 @endif
 
+                                            </td>
+                                            <td>
+                                                {{$fiche->price ?? 'non defini'}}
                                             </td>
                                             <td class="text-center">
                                                 <a href="{{ route('fiche.detail', $fiche->id) }}" class="btn btn-info">

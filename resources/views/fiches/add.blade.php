@@ -106,6 +106,10 @@
                                         <td>Statuts</td>
                                         <td>{{ $fiche->status }}</td>
                                     </tr>
+                                    <tr>
+                                        <td>Prix total(CDF)</td>
+                                        <td>{{ $fiche->price ?? 'non defini' }}</td>
+                                    </tr>
                                 </tbody>
                             </table>
 

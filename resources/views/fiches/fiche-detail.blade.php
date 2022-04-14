@@ -27,6 +27,10 @@
                                         <td class="text-capitalize">{{ App\Models\User::getName($fiche->users_id) }}</td>
                                     </tr>
                                     <tr>
+                                        <td class="font-weight-bold text-capitalize">Prix total(CDF)</td>
+                                        <td>{{$fiche->price ?? 'non defini'}}</td>
+                                    </tr>
+                                    <tr>
                                         <td class="font-weight-bold text-capitalize">Statuts</td>
                                         <td>
                                             @if ($fiche->status == 'admin')
