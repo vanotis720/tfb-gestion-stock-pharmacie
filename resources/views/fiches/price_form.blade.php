@@ -6,7 +6,7 @@
             <div class="col-md-4">
                 <div class="card card-user">
                     <div class="card-header">
-                        <h5 class="card-title">Ajouter les produits</h5>
+                        <h5 class="card-title">Determiner le prix total de la fiche</h5>
                     </div>
                     <div class="card-body">
                         @if (session('error'))
@@ -19,59 +19,15 @@
                                 <strong>{{ session('success') }}</strong>
                             </div>
                         @endif
-                        <form method="POST" action="{{ route('product.store') }}">
+                        <form method="POST" action="{{ route('fiche.update', $fiche->id) }}">
                             @csrf
-                            <input type="hidden" name="fiches_id" value="{{ $fiche->id }}">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Nom du produit</label>
-                                        <input type="text" class="form-control" name="nom"
-                                            placeholder="Renseigner le nom du produit" value="{{ old('nom') }}" required>
-                                        @error('nom')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Catégorie du produit</label>
-                                        <input type="text" class="form-control" name="categorie"
-                                            placeholder="Renseigner la catégorie du produit"
-                                            value="{{ old('categorie') }}" required>
-                                        @error('categorie')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Condition du produit</label>
-                                        <input type="text" name="condition" class="form-control"
-                                            placeholder="Renseigner la condition du produit" autocomplete="false">
-                                        @error('condition')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Quantité a commander</label>
-                                        <input type="text" name="quantite" class="form-control"
-                                            placeholder="Renseigner la quantité" autocomplete="false">
-                                        @error('quantite')
+                                        <label>Prix total(cdf)</label>
+                                        <input type="number" class="form-control" name="price"
+                                            placeholder="Renseigner le prix total en CDF" value="{{ old('price') }}" required>
+                                        @error('price')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -82,7 +38,7 @@
                             <div class="row">
                                 <div class="update ml-auto mr-auto">
                                     <button type="submit" class="btn btn-primary btn-round">Ajouter et
-                                        continuer</button>
+                                        Envoyer a la caisse</button>
                                 </div>
                             </div>
                         </form>
@@ -125,7 +81,7 @@
                                     </th>
                                 </thead>
                                 <tbody>
-                                    @foreach ($produits as $produit)
+                                    @foreach ($products as $produit)
                                         <tr>
                                             <td class="font-weight-bold text-capitalize"
                                                 style="word-wrap: break-word;min-width: 60px;max-width: 60px;">

@@ -66,9 +66,11 @@ class FicheController extends Controller
      * @param  \App\Models\Fiche  $fiche
      * @return \Illuminate\Http\Response
      */
-    public function edit(Fiche $fiche)
+    public function edit($fiche)
     {
-        //
+        $fiche = Fiche::find($fiche);
+        $products = Produit::getByFiche($fiche->id);
+        return view('fiches.price_form', compact('fiche', 'products'));
     }
 
     /**
@@ -78,22 +80,30 @@ class FicheController extends Controller
      * @param  \App\Models\Fiche  $fiche
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        $fiche = Fiche::find($id);
-        $fiche->status = 'admin';
-        if($fiche->update()) {
-            return redirect()->route('fiches.list')->withSuccess('La fiche a été soumis avec succès');
+        $validatedData = $request->validate([
+            'price' => 'required',
+        ]);
+        $fiche = Fiche::findOrFail($id);
+        $fiche->price = $request->price;
+        $fiche->status = 'caisse';
+
+        if ($fiche->update()) {
+            return redirect()->route('fiches.list')->withSuccess('La fiche a été soumis a la caisse avec succès');
         }
-        return redirect()->route('fiche.create', $fiche->id)->withAlert('une erreur s\'est produite, veuillez reessayer!');
+        return redirect()->route('fiche.detail', $fiche->id)->withAlert('une erreur s\'est produite, veuillez reessayer!');
     }
 
-    public function action($id, $action)
+    public function action($id, $action, $route = null)
     {
         $fiche = Fiche::find($id);
         $fiche->status = $action;
         if ($fiche->update()) {
             return redirect()->route('fiches.list')->withSuccess('L\'action a été effectuer avec succès');
+        }
+        if ($route) {
+            return redirect()->route($route, $fiche->id)->withAlert('une erreur s\'est produite, veuillez reessayer!');
         }
         return redirect()->route('fiche.detail', $fiche->id)->withAlert('une erreur s\'est produite, veuillez reessayer!');
     }
