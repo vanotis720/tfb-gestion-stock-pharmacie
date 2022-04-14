@@ -54,34 +54,7 @@
                                                 {{ App\Models\User::getName($fiche->users_id) }}
                                             </td>
                                             <td class="text-center">
-                                                @if ($fiche->status == 'admin')
-                                                    <h6>
-                                                        <span class="badge badge-warning"> En attente de
-                                                            l'administrateur</span>
-                                                    </h6>
-                                                @elseif ($fiche->status == 'caisse')
-                                                    <h6>
-                                                        <span class="badge badge-warning"> En attente de la caisse</span>
-                                                    </h6>
-                                                @elseif ($fiche->status == 'pharmacist')
-                                                    <h6>
-                                                        <span class="badge badge-warning"> En attente du pharmacien</span>
-                                                    </h6>
-                                                @elseif ($fiche->status == 'solved')
-                                                    <h6>
-                                                        <span class="badge badge-warning"> Acheter, en attende de
-                                                            validation</span>
-                                                    </h6>
-                                                @elseif ($fiche->status == 'validated')
-                                                    <h6>
-                                                        <span class="badge badge-success"> Valider, Ajouter au stock</span>
-                                                    </h6>
-                                                @elseif ($fiche->status == 'rejected')
-                                                    <h6>
-                                                        <span class="badge badge-danger"> Demande refuser</span>
-                                                    </h6>
-                                                @endif
-
+                                                @include('templates.status')
                                             </td>
                                             <td>
                                                 {{ App\Models\Facture::getPrice($fiche->id) }}
