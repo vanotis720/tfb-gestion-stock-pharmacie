@@ -13,6 +13,5 @@ class Fiche extends Model
         'users_id',
         'status',
         'no_fiche',
-        'price'
     ];
 }

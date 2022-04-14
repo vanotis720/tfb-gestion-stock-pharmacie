@@ -26,7 +26,8 @@
                                     <div class="form-group">
                                         <label>Prix total(cdf)</label>
                                         <input type="number" class="form-control" name="price"
-                                            placeholder="Renseigner le prix total en CDF" value="{{ old('price') }}" required>
+                                            placeholder="Renseigner le prix total en CDF" value="{{ old('price') }}"
+                                            required>
                                         @error('price')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -64,7 +65,7 @@
                                     </tr>
                                     <tr>
                                         <td>Prix total(CDF)</td>
-                                        <td>{{ $fiche->price ?? 'non defini' }}</td>
+                                        <td>{{ App\Models\Facture::getPrice($fiche->id) }}</td>
                                     </tr>
                                 </tbody>
                             </table>

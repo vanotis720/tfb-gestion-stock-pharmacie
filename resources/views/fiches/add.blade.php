@@ -108,7 +108,7 @@
                                     </tr>
                                     <tr>
                                         <td>Prix total(CDF)</td>
-                                        <td>{{ $fiche->price ?? 'non defini' }}</td>
+                                        <td>{{ App\Models\Facture::getPrice($fiche->id) }}</td>
                                     </tr>
                                 </tbody>
                             </table>

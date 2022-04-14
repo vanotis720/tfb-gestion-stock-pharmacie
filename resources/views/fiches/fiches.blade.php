@@ -84,7 +84,7 @@
 
                                             </td>
                                             <td>
-                                                {{$fiche->price ?? 'non defini'}}
+                                                {{ App\Models\Facture::getPrice($fiche->id) }}
                                             </td>
                                             <td class="text-center">
                                                 <a href="{{ route('fiche.detail', $fiche->id) }}" class="btn btn-info">

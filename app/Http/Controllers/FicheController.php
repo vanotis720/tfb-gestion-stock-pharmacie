@@ -86,7 +86,7 @@ class FicheController extends Controller
             'price' => 'required',
         ]);
         $fiche = Fiche::findOrFail($id);
-        $fiche->price = $request->price;
+        $fiche->price = $request->price; // change on Facture
         $fiche->status = 'caisse';
 
         if ($fiche->update()) {

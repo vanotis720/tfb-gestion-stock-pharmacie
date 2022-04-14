@@ -28,7 +28,7 @@
                                     </tr>
                                     <tr>
                                         <td class="font-weight-bold text-capitalize">Prix total(CDF)</td>
-                                        <td>{{$fiche->price ?? 'non defini'}}</td>
+                                        <td>{{ App\Models\Facture::getPrice($fiche->id) }}</td>
                                     </tr>
                                     <tr>
                                         <td class="font-weight-bold text-capitalize">Statuts</td>
