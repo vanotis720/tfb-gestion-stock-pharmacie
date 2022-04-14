@@ -20,7 +20,7 @@ class Facture extends Model
 
     public static function getPrice($fiche)
     {
-        $facture = DB::table('factures')->find($fiche);
+        $facture = DB::table('factures')->where('fiches_id',$fiche)->first();
         return $facture->price ?? 0;
     }
 }

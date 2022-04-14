@@ -6,7 +6,7 @@
             <div class="col-md-4">
                 <div class="card card-user">
                     <div class="card-header">
-                        <h5 class="card-title">Determiner le prix total de la fiche</h5>
+                        <h5 class="card-title">Mettre en stock</h5>
                     </div>
                     <div class="card-body">
                         @if (session('error'))
@@ -19,16 +19,29 @@
                                 <strong>{{ session('success') }}</strong>
                             </div>
                         @endif
-                        <form method="POST" action="{{ route('fiche.update', $fiche->id) }}">
+                        <form method="POST" action="{{ route('facture.update', $fiche->id) }}">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Prix total(cdf)</label>
-                                        <input type="number" class="form-control" name="price"
-                                            placeholder="Renseigner le prix total en CDF" value="{{ old('price') }}"
-                                            required>
-                                        @error('price')
+                                        <label>Depot Pharmacetique</label>
+                                        <input type="text" class="form-control" name="organisation"
+                                            placeholder="Renseigner le depot" value="{{ old('organisation') }}" required>
+                                        @error('organisation')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Date d'achat</label>
+                                        <input type="date" class="form-control" name="date"
+                                            placeholder="Renseigner la date d'achat" value="{{ old('date') }}" required>
+                                        @error('date')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -38,8 +51,9 @@
                             </div>
                             <div class="row">
                                 <div class="update ml-auto mr-auto">
-                                    <button type="submit" class="btn btn-primary btn-round">Ajouter et
-                                        Envoyer a la caisse</button>
+                                    <button type="submit" class="btn btn-primary btn-round">
+                                        Valider et envoyer
+                                    </button>
                                 </div>
                             </div>
                         </form>

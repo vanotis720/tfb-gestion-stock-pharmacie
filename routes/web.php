@@ -4,10 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FicheController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\ApplicantController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FactureController;
 use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,8 +51,11 @@ Route::middleware('auth')->group(
         Route::post('fiche/{id}/update', [FicheController::class, 'update'])->name('fiche.update');
         Route::get('fiche/{id}/action/{action}/{route?}', [FicheController::class, 'action'])->name('fiche.action');
 
-
         Route::post('product', [ProduitController::class, 'store'])->name('product.store');
         Route::get('product/{id}/fiche/{fiche}/delete', [ProduitController::class, 'destroy'])->name('product.destroy');
+
+        Route::get('facture/{id}/edit', [FactureController::class, 'edit'])->name('facture.edit');
+        Route::post('facture/{id}/update', [FactureController::class, 'update'])->name('facture.update');
+
     }
 );

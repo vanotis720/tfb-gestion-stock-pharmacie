@@ -1,7 +1,6 @@
 @if (auth()->user()->role == 'admin')
     @if ($fiche->status == 'admin')
-        <a href="{{ route('fiche.edit', $fiche->id) }}"
-            class="btn btn-round btn-success float-right">
+        <a href="{{ route('fiche.edit', $fiche->id) }}" class="btn btn-round btn-success float-right">
             Envoyer a la caisse
             <i class="nc-icon nc-money-coins"></i>
         </a>
@@ -29,8 +28,7 @@
 @endif
 @if (auth()->user()->role == 'pharmacist')
     @if ($fiche->status == 'pharmacist')
-        <a href="{{ route('fiche.action', ['id' => $fiche->id, 'action' => 'solved']) }}"
-            class="btn btn-round btn-success float-right">
+        <a href="{{ route('facture.edit', $fiche->id) }}" class="btn btn-round btn-success float-right">
             Confirmer l'achat
             <i class="nc-icon nc-check-2"></i>
         </a>

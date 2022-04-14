@@ -82,15 +82,19 @@ class FicheController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'price' => 'required',
         ]);
-        $fiche = Fiche::findOrFail($id);
-        $fiche->price = $request->price; // change on Facture
-        $fiche->status = 'caisse';
 
-        if ($fiche->update()) {
-            return redirect()->route('fiches.list')->withSuccess('La fiche a été soumis a la caisse avec succès');
+        $fiche = Fiche::findOrFail($id);
+        $facture = new FactureController();
+
+        if ($facture->store($request, $fiche)) {
+            $fiche->status = 'caisse';
+
+            if ($fiche->update()) {
+                return redirect()->route('fiches.list')->withSuccess('La fiche a été soumis a la caisse avec succès');
+            }
         }
         return redirect()->route('fiche.detail', $fiche->id)->withAlert('une erreur s\'est produite, veuillez reessayer!');
     }
