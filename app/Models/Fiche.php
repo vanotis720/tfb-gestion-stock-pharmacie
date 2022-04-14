@@ -12,6 +12,7 @@ class Fiche extends Model
     protected $fillable = [
         'users_id',
         'status',
-        'no_fiche'
+        'no_fiche',
+        'price'
     ];
 }
