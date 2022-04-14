@@ -14,9 +14,9 @@
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Applications</p>
+                                    <p class="card-category">Produits</p>
                                     <p class="card-title">
-                                        {{-- {{ App\Models\Applicant::count() }} --}}
+                                        {{ App\Models\Produit::count() }}
                                     <p>
                                 </div>
                             </div>
@@ -26,7 +26,7 @@
                         <hr>
                         <div class="stats">
                             <i class="fa fa-refresh"></i>
-                            Update Now
+                            Mise a jour permanente
                         </div>
                     </div>
                 </div>
@@ -42,9 +42,9 @@
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Contacts</p>
+                                    <p class="card-category">Utilisateurs</p>
                                     <p class="card-title">
-                                        {{-- {{ App\Models\Contact::count() }} --}}
+                                        {{ App\Models\User::count() }}
                                     <p>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                         <hr>
                         <div class="stats">
                             <i class="fa fa-calendar-o"></i>
-                            Last day
+                            Mise a jour permanente
                         </div>
                     </div>
                 </div>
@@ -62,52 +62,60 @@
         </div>
 
         <div class="row">
-            <div class="col-md-4">
-                <div class="card ">
-                    <div class="card-header ">
-                        <h5 class="card-title">Contacts</h5>
-                        <p class="card-category">Liste des contacts</p>
-                    </div>
-                    <div class="card-body ">
-                        <canvas id="chartContact" height="100"></canvas>
-                    </div>
-                    <div class="card-footer ">
-                        <div class="legend">
-                            <i class="fa fa-circle text-danger"></i> Nouveau
-                            <i class="fa fa-circle text-primary"></i> Ouvert
-                        </div>
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-calendar"></i> Nombre des contacts du site
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="card card-chart">
+            <div class="col-md-12">
+                <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">Applications</h5>
-                        <p class="card-category">Applications par mois</p>
+                        <h4 class="card-title">Dernieres fiches d'approvisionnement</h4>
                     </div>
                     <div class="card-body">
-                        <canvas id="chartApplicant" width="400" height="100"></canvas>
-                    </div>
-                    <div class="card-footer">
-                        <div class="chart-legend">
-                            <i class="fa fa-circle text-danger"></i> applications
-                        </div>
-                        <hr />
-                        <div class="card-stats">
-                            <i class="fa fa-check"></i> Data information certified
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class=" text-primary">
+                                    <th class="text-center">
+                                        #
+                                    </th>
+                                    <th class="text-center">
+                                        Demander Par
+                                    </th>
+                                    <th class="text-center">
+                                        Status
+                                    </th>
+                                    <th>
+                                        Prix Total(CDF)
+                                    </th>
+                                    <th class="text-center">
+                                        Action
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    @foreach (App\Models\Fiche::getLast(3) as $fiche)
+                                        <tr>
+                                            <td class="text-center">
+                                                {{ $fiche->no_fiche }}
+                                            </td>
+                                            <td class="text-capitalize">
+                                                {{ App\Models\User::getName($fiche->users_id) }}
+                                            </td>
+                                            <td class="text-center">
+                                                @include('templates.status')
+                                            </td>
+                                            <td>
+                                                {{ App\Models\Facture::getPrice($fiche->id) }}
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="{{ route('fiche.detail', $fiche->id) }}" class="btn btn-info">
+                                                    Details
+                                                    <i class="nc-icon nc-single-copy-04"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    {{-- <script>
-        var contact_init = {{ App\Models\Contact::count('init') }};
-        var contact_treated = {{ App\Models\Contact::count('treated') }};
-        var applications = {{ json_encode(App\Models\Applicant::statsMonth()) }}
-    </script> --}}
 @endsection

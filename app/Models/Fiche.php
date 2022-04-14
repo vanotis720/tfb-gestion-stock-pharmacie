@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Fiche extends Model
 {
@@ -14,4 +15,13 @@ class Fiche extends Model
         'status',
         'no_fiche',
     ];
+
+    public static function getLast($limit)
+    {
+        return DB::table('fiches')
+            ->where('status', '!=', 'init')
+            ->orderBy('created_at')
+            ->limit($limit)
+            ->get();
+    }
 }

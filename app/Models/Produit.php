@@ -23,4 +23,13 @@ class Produit extends Model
         $products = DB::table('produits')->where('fiches_id', $fiche)->orderBy('created_at')->get();
         return $products;
     }
+
+    public static function count()
+    {
+        $products = DB::table('produits')
+            ->join('fiches', 'fiches.id', 'produits.fiches_id')
+            ->where('fiches.status', 'validated')
+            ->sum('quantite');
+        return $products;
+    }
 }
