@@ -135,8 +135,9 @@ class FicheController extends Controller
     private function generateCode()
     {
         $code = rand(10, 10000);
+        $fiche = Fiche::where('no_fiche', 'FC-' . $code)->first();
 
-        if (Fiche::find('FC-' . $code)) {
+        if ($fiche) {
             $code = rand(10, 10000);
         }
         return 'FC-' . $code;
