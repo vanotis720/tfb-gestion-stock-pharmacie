@@ -16,6 +16,7 @@ class CreateOrdonnancesTable extends Migration
         Schema::create('ordonnances', function (Blueprint $table) {
             $table->id();
             $table->string('datePrescription');
+            $table->enum('status', ['init', 'confirmed', 'payed', 'caisse']);
             $table->foreignId('patient_id')->constrained();
             $table->timestamps();
         });

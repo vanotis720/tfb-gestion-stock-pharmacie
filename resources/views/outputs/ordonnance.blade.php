@@ -124,9 +124,8 @@
                         </div>
                         <div class="row">
                             <div class="update ml-auto mr-auto">
-                                <a href="{{ route('fiche.action', ['id' => $ordonnance->id, 'action' => 'admin', 'route' => 'ordonnance.create']) }}"
-                                    class="btn btn-warning btn-round">
-                                    Fin ordonnance
+                                <a href="{{ route('ordonnance.update', ['id' => $ordonnance->id]) }}" class="btn btn-warning btn-round">
+                                    Valider ordonnance et continuer
                                 </a>
                             </div>
                         </div>

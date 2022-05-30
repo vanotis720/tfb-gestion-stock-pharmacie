@@ -59,5 +59,8 @@ Route::middleware('auth')->group(
         Route::get('ordonnance/{patient}/{id?}', [OrdonnanceController::class, 'create'])->name('ordonnance.create');
         Route::post('ordonnance/{id}', [OrdonnanceController::class, 'addProduct'])->name('ordonnance.product');
         Route::get('ordonnance/{ordonnance_id}/product/{product_id}', [OrdonnanceController::class, 'removeProduct'])->name('product.remove');
+        Route::get('ordonnances/{id}/confirmed', [OrdonnanceController::class, 'update'])->name('ordonnance.update');
+
+        Route::get('ordonnances/{state}', [OrdonnanceController::class, 'index'])->name('ordonnances');
     }
 );

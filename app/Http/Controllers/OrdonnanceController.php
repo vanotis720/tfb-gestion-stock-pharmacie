@@ -14,9 +14,14 @@ class OrdonnanceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($status)
     {
-        //
+        if ($status == 'caisse') {
+            $ordonnances = Ordonnance::where('status', $status)
+                ->orWhere('status', 'payed')
+                ->get();
+        }
+        return view('outputs.attente', compact('ordonnances'));
     }
 
     /**
@@ -112,9 +117,18 @@ class OrdonnanceController extends Controller
      * @param  \App\Models\Ordonnance  $ordonnance
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ordonnance $ordonnance)
+    public function update($ordonnance)
     {
-        //
+        $ordonnance = Ordonnance::find($ordonnance);
+        if ($ordonnance->status == 'payed') {
+            $ordonnance->status = 'confirmed';
+        } else {
+            $subscription = $ordonnance->patient->subscription;
+            $ordonnance->status = $subscription == 0 ? 'confirmed' : 'caisse';
+        }
+        $ordonnance->save();
+
+        return redirect()->route('patients.index');
     }
 
     /**

@@ -11,6 +11,7 @@ class Ordonnance extends Model
 
     protected $fillable = [
         'datePrescription',
+        'status',
         'patient_id'
     ];
 
@@ -28,5 +29,10 @@ class Ordonnance extends Model
     public function produits()
     {
         return $this->belongsToMany(Produit::class, 'ordonnance_has_produits')->withPivot('dosage', 'quantite');
+    }
+
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class);
     }
 }

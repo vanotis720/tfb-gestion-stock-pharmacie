@@ -43,6 +43,12 @@
                         <p>Sortie des produits</p>
                     </a>
                 </li>
+                <li class="{{ Request::is('ordonnances/*') ? 'active' : '' }}">
+                    <a href="{{ route('ordonnances', 'caisse') }}">
+                        <i class="nc-icon nc-tag-content"></i>
+                        <p>Ordonnance en attente</p>
+                    </a>
+                </li>
             @endif
 
             <hr>
