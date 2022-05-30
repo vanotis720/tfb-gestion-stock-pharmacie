@@ -5,8 +5,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FicheController;
 use App\Http\Controllers\FactureController;
+use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrdonnanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,5 +53,11 @@ Route::middleware('auth')->group(
 
         Route::get('facture/{id}/edit', [FactureController::class, 'edit'])->name('facture.edit');
         Route::post('facture/{id}/update', [FactureController::class, 'update'])->name('facture.update');
+
+        // patients
+        Route::get('patients', [PatientController::class, 'index'])->name('patients.index');
+        Route::get('ordonnance/{patient}/{id?}', [OrdonnanceController::class, 'create'])->name('ordonnance.create');
+        Route::post('ordonnance/{id}', [OrdonnanceController::class, 'addProduct'])->name('ordonnance.product');
+        Route::get('ordonnance/{ordonnance_id}/product/{product_id}', [OrdonnanceController::class, 'removeProduct'])->name('product.remove');
     }
 );

@@ -15,7 +15,7 @@ class CreateOrdonnanceHasProduitsTable extends Migration
     {
         Schema::create('ordonnance_has_produits', function (Blueprint $table) {
             $table->id();
-            $table->string('dosage');
+            $table->string('dosage')->nullable();
             $table->double('quantite');
             $table->foreignId('ordonnance_id')->constrained();
             $table->foreignId('produit_id')->constrained();

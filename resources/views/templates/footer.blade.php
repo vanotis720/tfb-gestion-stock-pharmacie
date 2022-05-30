@@ -19,6 +19,7 @@
         demo.initChartsPages();
     });
 </script>
+@stack('script')
 </body>
 
 </html>

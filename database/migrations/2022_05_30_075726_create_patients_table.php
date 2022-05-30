@@ -19,7 +19,7 @@ class CreatePatientsTable extends Migration
             $table->string('statut');
             $table->string('nom');
             $table->string('age');
-            $table->enum('subscription', ['0', '1']);
+            $table->boolean('subscription');
             $table->timestamps();
         });
     }

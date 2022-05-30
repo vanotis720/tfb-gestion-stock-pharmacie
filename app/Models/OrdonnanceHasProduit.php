@@ -12,7 +12,7 @@ class OrdonnanceHasProduit extends Model
     protected $fillable = [
         'dosage',
         'quantite',
-        'ordonnances_id',
-        'produits_id'
+        'ordonnance_id',
+        'produit_id'
     ];
 }

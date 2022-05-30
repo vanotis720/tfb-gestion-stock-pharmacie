@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ordonnance;
+use App\Models\OrdonnanceHasProduit;
+use App\Models\Produit;
 use Illuminate\Http\Request;
 
 class OrdonnanceController extends Controller
@@ -22,9 +24,21 @@ class OrdonnanceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($patient, $id = null)
     {
-        //
+        if ($id == null) {
+            // find ordonnance
+            $ordonnance = Ordonnance::create([
+                'patient_id' => $patient,
+                'datePrescription' => date('Y-m-d'),
+            ]);
+        } else {
+            // init ordonnance
+            $ordonnance = Ordonnance::find($id);
+        }
+        $ordonnance_produits = $ordonnance->produits;
+
+        return view('outputs.ordonnance', compact('patient', 'ordonnance', 'ordonnance_produits'));
     }
 
     /**
@@ -35,7 +49,38 @@ class OrdonnanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 
+    }
+
+    public function addProduct(Request $request, $ordonnance)
+    {
+        $request->validate([
+            'produit_id' => 'required',
+            'quantite' => 'required',
+            'patient_id' => 'required'
+        ]);
+
+        OrdonnanceHasProduit::create([
+            'produit_id' => $request->produit_id,
+            'ordonnance_id' => $ordonnance,
+            'quantite' => $request->quantite,
+        ]);
+
+        // TODO: remove product quantity to product table total
+
+        return redirect()
+            ->route('ordonnance.create', ['id' => $ordonnance, 'patient' => $request->patient_id])
+            ->withInfo('Produit ajouter a la commande');
+    }
+
+    public function removeProduct($ordonnance, $product)
+    {
+        $ordonnance = Ordonnance::find($ordonnance);
+        $has_product = OrdonnanceHasProduit::where('produit_id', $product)->delete();
+
+        return redirect()
+            ->route('ordonnance.create', ['id' => $ordonnance->id, 'patient' => $ordonnance->patient_id])
+            ->with('Produit retirer de la commande');
     }
 
     /**

@@ -37,8 +37,8 @@
 
             {{-- pharmacist specific action --}}
             @if (auth()->user()->role == 'pharmacist')
-                <li class="{{ Request::is('user*') ? 'active' : '' }}">
-                    <a href="{{ route('users.list') }}">
+                <li class="{{ Request::is('patient*') ? 'active' : '' }}">
+                    <a href="{{ route('patients.index') }}">
                         <i class="nc-icon nc-send"></i>
                         <p>Sortie des produits</p>
                     </a>
