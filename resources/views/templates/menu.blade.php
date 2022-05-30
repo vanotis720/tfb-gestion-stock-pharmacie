@@ -34,8 +34,18 @@
                     <p>Demande d'approvisionnement</p>
                 </a>
             </li>
-            
 
+            {{-- pharmacist specific action --}}
+            @if (auth()->user()->role == 'pharmacist')
+                <li class="{{ Request::is('user*') ? 'active' : '' }}">
+                    <a href="{{ route('users.list') }}">
+                        <i class="nc-icon nc-send"></i>
+                        <p>Sortie des produits</p>
+                    </a>
+                </li>
+            @endif
+
+            <hr>
             <li class="{{ Request::is('account') ? 'active' : '' }}">
                 <a href="{{ route('account') }}">
                     <i class="nc-icon nc-single-02"></i>

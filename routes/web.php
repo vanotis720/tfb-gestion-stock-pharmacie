@@ -24,18 +24,13 @@ Route::get('login', function () {
 })->name('login');
 
 Route::post('login', [AuthController::class, 'login'])->name('login.post');
-
 Route::get('signin', [AuthController::class, 'signin'])->name('signin'); //to remove
 
 Route::middleware('auth')->group(
     function () {
-
         Route::get('/', [DashboardController::class, 'home']);
-
         Route::get('account', [AuthController::class, 'show'])->name('account');
-
         Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-
         Route::post('account/update', [AuthController::class, 'update'])->name('account.update');
 
         // admin specific action
@@ -56,6 +51,5 @@ Route::middleware('auth')->group(
 
         Route::get('facture/{id}/edit', [FactureController::class, 'edit'])->name('facture.edit');
         Route::post('facture/{id}/update', [FactureController::class, 'update'])->name('facture.update');
-
     }
 );
