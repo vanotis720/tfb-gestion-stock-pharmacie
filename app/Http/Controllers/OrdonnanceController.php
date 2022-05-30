@@ -36,6 +36,7 @@ class OrdonnanceController extends Controller
             $ordonnance = Ordonnance::create([
                 'patient_id' => $patient,
                 'datePrescription' => date('Y-m-d'),
+                'status' => 'init'
             ]);
         } else {
             // init ordonnance
