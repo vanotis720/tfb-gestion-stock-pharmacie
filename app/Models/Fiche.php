@@ -24,4 +24,12 @@ class Fiche extends Model
             ->limit($limit)
             ->get();
     }
+
+    /**
+     * Get the produits for the fiche.
+     */
+    public function produits()
+    {
+        return $this->hasMany(Produit::class);
+    }
 }

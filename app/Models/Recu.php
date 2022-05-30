@@ -14,4 +14,12 @@ class Recu extends Model
         'datePaiement',
         'ordonnance_id',
     ];
+
+    /**
+     * Get the ordonnance that owns the recu.
+     */
+    public function ordonnance()
+    {
+        return $this->belongsTo(Ordonnance::class);
+    }
 }

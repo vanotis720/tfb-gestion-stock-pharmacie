@@ -13,4 +13,20 @@ class Ordonnance extends Model
         'datePrescription',
         'patient_id'
     ];
+
+    /**
+     * Get the recu associated with the ordonnance.
+     */
+    public function ordonnance()
+    {
+        return $this->hasOne(Recu::class);
+    }
+
+    /**
+     * The produits that belong to the ordonnance.
+     */
+    public function produits()
+    {
+        return $this->belongsToMany(Produit::class, 'ordonnance_has_produits')->withPivot('dosage', 'quantite');
+    }
 }
