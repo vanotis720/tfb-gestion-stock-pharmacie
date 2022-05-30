@@ -73,6 +73,7 @@ class OrdonnanceController extends Controller
         ]);
 
         // TODO: remove product quantity to product table total
+        Produit::reduceQuantity($request->produit_id, $request->quantite);
 
         return redirect()
             ->route('ordonnance.create', ['id' => $ordonnance, 'patient' => $request->patient_id])
@@ -82,7 +83,10 @@ class OrdonnanceController extends Controller
     public function removeProduct($ordonnance, $product)
     {
         $ordonnance = Ordonnance::find($ordonnance);
-        $has_product = OrdonnanceHasProduit::where('produit_id', $product)->delete();
+        $has_product = OrdonnanceHasProduit::where('produit_id', $product)->first();
+
+        Produit::addQuantity($product, $has_product->quantite);
+        $has_product->delete();
 
         return redirect()
             ->route('ordonnance.create', ['id' => $ordonnance->id, 'patient' => $ordonnance->patient_id])

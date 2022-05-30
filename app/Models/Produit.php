@@ -46,4 +46,18 @@ class Produit extends Model
     {
         return $this->belongsToMany(Produit::class, 'ordonnance_has_produits')->withPivot('dosage', 'quantite');
     }
+
+    public static function reduceQuantity($product, $quantity)
+    {
+        $product = Produit::find($product);
+        $product->quantite -= $quantity;
+        return $product->save();
+    }
+
+    public static function addQuantity($product, $quantity)
+    {
+        $product = Produit::find($product);
+        $product->quantite += $quantity;
+        return $product->save();
+    }
 }
