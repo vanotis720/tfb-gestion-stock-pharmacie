@@ -13,6 +13,7 @@ class OrdonnanceHasProduit extends Model
         'dosage',
         'quantite',
         'ordonnance_id',
-        'produit_id'
+        'produit_id',
+        'price'
     ];
 }

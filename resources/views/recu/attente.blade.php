@@ -51,7 +51,7 @@
                                                 {{ $ordonnance->datePrescription }}
                                             </td>
                                             <td class="text-center text-capitalize">
-                                                {{ $ordonnance->montant }} CDF
+                                                {{ App\Models\Ordonnance::totalPrice($ordonnance->id) }} CDF
                                             </td>
                                             <td class="text-center">
                                                 <a href="{{ route('ordonnance.update', ['id' => $ordonnance->id]) }}"
