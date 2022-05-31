@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CaisseController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FicheController;
 use App\Http\Controllers\FactureController;
@@ -62,5 +63,8 @@ Route::middleware('auth')->group(
         Route::get('ordonnances/{id}/confirmed', [OrdonnanceController::class, 'update'])->name('ordonnance.update');
 
         Route::get('ordonnances/{state}', [OrdonnanceController::class, 'index'])->name('ordonnances');
+
+        // caisse
+        Route::get('recu', [CaisseController::class, 'index'])->name('recu.index');
     }
 );

@@ -124,16 +124,21 @@ class OrdonnanceController extends Controller
      */
     public function update($ordonnance)
     {
+        $route = 'patients.index';
         $ordonnance = Ordonnance::find($ordonnance);
+
         if ($ordonnance->status == 'payed') {
             $ordonnance->status = 'confirmed';
+        } elseif ($ordonnance->status == 'caisse') {
+            $ordonnance->status = 'payed';
+            $route = 'recu.index';
         } else {
             $subscription = $ordonnance->patient->subscription;
             $ordonnance->status = $subscription == 0 ? 'confirmed' : 'caisse';
         }
         $ordonnance->save();
 
-        return redirect()->route('patients.index');
+        return redirect()->route($route);
     }
 
     /**

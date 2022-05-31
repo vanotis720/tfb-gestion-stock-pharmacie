@@ -51,6 +51,16 @@
                 </li>
             @endif
 
+            {{-- pharmacist specific action --}}
+            @if (auth()->user()->role == 'caisse')
+                <li class="{{ Request::is('recu') ? 'active' : '' }}">
+                    <a href="{{ route('recu.index') }}">
+                        <i class="nc-icon nc-tag-content"></i>
+                        <p>Ordonnance en attente</p>
+                    </a>
+                </li>
+            @endif
+
             <hr>
             <li class="{{ Request::is('account') ? 'active' : '' }}">
                 <a href="{{ route('account') }}">
