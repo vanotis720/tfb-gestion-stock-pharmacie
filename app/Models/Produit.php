@@ -69,4 +69,10 @@ class Produit extends Model
         $product->quantite += $quantity;
         return $product->save();
     }
+
+    public static function getQuantity($id)
+    {
+        // dd($id);
+        return (self::find($id))->quantite;
+    }
 }
