@@ -63,6 +63,7 @@ class OrdonnanceController extends Controller
         $request->validate([
             'produit_id' => 'required',
             'quantite' => 'required',
+            'price' => 'required',
             'patient_id' => 'required'
         ]);
 
@@ -70,9 +71,9 @@ class OrdonnanceController extends Controller
             'produit_id' => $request->produit_id,
             'ordonnance_id' => $ordonnance,
             'quantite' => $request->quantite,
+            'price' => $request->price
         ]);
 
-        // TODO: remove product quantity to product table total
         Produit::reduceQuantity($request->produit_id, $request->quantite);
 
         return redirect()

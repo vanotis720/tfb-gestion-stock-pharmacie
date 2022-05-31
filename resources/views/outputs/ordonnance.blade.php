@@ -36,7 +36,9 @@
                                         <select name="produit_id" id="produit_id" class="form-control" required>
                                             <option selected disabled>Rechercher le produit ici</option>
                                             @foreach (App\Models\Produit::where('quantite', '>=', 1)->get() as $item)
-                                                <option value="{{ $item->id }}">{{ $item->nom }}</option>
+                                                <option value="{{ $item->id }}">
+                                                    {{ $item->nom . '(Stock: ' . $item->quantite . ' - Exp: ' . $item->expiration . ')' }}
+                                                </option>
                                             @endforeach
                                         </select>
                                         @error('produit_id')
@@ -47,26 +49,26 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="row">
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="dosage">Dosage</label>
-                                        <input type="text" class="form-control" name="dosage"
-                                            placeholder="Renseigner la catégorie du produit" value="{{ old('dosage') }}"
-                                            required>
-                                        @error('dosage')
+                                        <label for="price">Prix unitaire</label>
+                                        <input type="number" class="form-control" name="price"
+                                            placeholder="Renseigner le prix unitaire du produit"
+                                            value="{{ old('price') }}" required>
+                                        @error('price')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Quantité</label>
-                                        <input type="text" name="quantite" class="form-control"
+                                        <input type="number" name="quantite" class="form-control"
                                             placeholder="Renseigner la condition du produit" autocomplete="false" required>
                                         @error('quantite')
                                             <span class="invalid-feedback" role="alert">
@@ -95,7 +97,7 @@
                                 <thead>
                                     <th>Produit</th>
                                     <th>Quantité</th>
-                                    <th>Condition</th>
+                                    <th>Montant(Total)</th>
                                     <th>Expiration</th>
                                     <th class="text-center">
                                         Action
@@ -109,7 +111,7 @@
                                                 {{ $produit->nom }}
                                             </td>
                                             <td>{{ $produit->pivot->quantite }}</td>
-                                            <td>{{ $produit->condition }}</td>
+                                            <td>{{ $produit->pivot->quantite * $produit->pivot->price }}</td>
                                             <td>{{ $produit->expiration }}</td>
                                             <td>
                                                 <a href="{{ route('product.remove', ['ordonnance_id' => $ordonnance->id, 'product_id' => $produit->id]) }}"
@@ -124,7 +126,8 @@
                         </div>
                         <div class="row">
                             <div class="update ml-auto mr-auto">
-                                <a href="{{ route('ordonnance.update', ['id' => $ordonnance->id]) }}" class="btn btn-warning btn-round">
+                                <a href="{{ route('ordonnance.update', ['id' => $ordonnance->id]) }}"
+                                    class="btn btn-warning btn-round">
                                     Valider ordonnance et continuer
                                 </a>
                             </div>

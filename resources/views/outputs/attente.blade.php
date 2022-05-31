@@ -29,6 +29,9 @@
                                         Date de prescription
                                     </th>
                                     <th class="text-center">
+                                        Montant total
+                                    </th>
+                                    <th class="text-center">
                                         Status
                                     </th>
                                     <th class="text-center">
@@ -43,6 +46,9 @@
                                             </td>
                                             <td class="text-center">
                                                 {{ $ordonnance->datePrescription }}
+                                            </td>
+                                            <td class="text-center text-capitalize">
+                                                {{ App\Models\Ordonnance::totalPrice($ordonnance->id) }} CDF
                                             </td>
                                             <td class="text-center text-capitalize">
                                                 @if ($ordonnance->status == 'caisse')
