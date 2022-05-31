@@ -23,12 +23,21 @@ class Produit extends Model
         return DB::table('produits')->where('fiches_id', $fiche)->orderBy('created_at')->get();
     }
 
-    public static function count()
+    public static function count($type = null)
     {
-        return DB::table('produits')
-            ->join('fiches', 'fiches.id', 'produits.fiches_id')
-            ->where('fiches.status', 'validated')
-            ->sum('quantite');
+        if ($type == null) {
+            return DB::table('produits')
+                ->join('fiches', 'fiches.id', 'produits.fiches_id')
+                ->where('fiches.status', 'validated')
+                ->where('produits.quantite', '>', 0)
+                ->sum('quantite');
+        } else {
+            return DB::table('produits')
+                ->join('fiches', 'fiches.id', 'produits.fiches_id')
+                ->where('fiches.status', 'validated')
+                ->where('produits.quantite', '>', 0)
+                ->distinct('nom')->count();
+        }
     }
 
     /**

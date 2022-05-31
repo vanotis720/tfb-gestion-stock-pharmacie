@@ -16,7 +16,7 @@
                                 <div class="numbers">
                                     <p class="card-category">Produits</p>
                                     <p class="card-title">
-                                        {{ App\Models\Produit::count() }}
+                                        {{ App\Models\Produit::count('unique') }}
                                     <p>
                                 </div>
                             </div>
