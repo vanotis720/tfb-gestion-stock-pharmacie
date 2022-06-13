@@ -73,6 +73,13 @@ class FicheController extends Controller
         return view('fiches.price_form', compact('fiche', 'products'));
     }
 
+    public function editProduct($fiche)
+    {
+        $fiche = Fiche::find($fiche);
+        $products = Produit::getByFiche($fiche->id);
+        return view('produit.exp_form', compact('fiche', 'products'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -99,11 +106,24 @@ class FicheController extends Controller
         return redirect()->route('fiche.detail', $fiche->id)->withAlert('une erreur s\'est produite, veuillez reessayer!');
     }
 
+    public function updateProduct(Request $request, $id)
+    {
+        foreach ($request->except('_token') as $product_id => $expiration) {
+            $produit = Produit::find($product_id);
+            $produit->expiration = $expiration;
+            $produit->update();
+        }
+        return redirect()->route('fiches.list')->withSuccess('La fiche a été modifier avec succès');
+    }
+
     public function action($id, $action, $route = null)
     {
         $fiche = Fiche::find($id);
         $fiche->status = $action;
         if ($fiche->update()) {
+            if ($action == 'solved') {
+                return redirect()->route('fiche.editProduct', $id)->withSuccess('L\'action a été effectuer avec succès');
+            }
             return redirect()->route('fiches.list')->withSuccess('L\'action a été effectuer avec succès');
         }
         if ($route) {

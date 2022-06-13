@@ -59,7 +59,7 @@ class ProduitController extends Controller
      */
     public function edit(Produit $produit)
     {
-        //
+        
     }
 
     /**

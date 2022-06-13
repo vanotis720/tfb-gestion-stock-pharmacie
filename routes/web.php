@@ -46,7 +46,9 @@ Route::middleware('auth')->group(
         Route::get('fiche/{id}/detail', [FicheController::class, 'show'])->name('fiche.detail');
         Route::get('fiche/{id?}', [FicheController::class, 'create'])->name('fiche.create');
         Route::get('fiche/{id}/edit', [FicheController::class, 'edit'])->name('fiche.edit');
+        Route::get('fiche/{id}/produit', [FicheController::class, 'editProduct'])->name('fiche.editProduct');
         Route::post('fiche/{id}/update', [FicheController::class, 'update'])->name('fiche.update');
+        Route::post('fiche/{id}/produit', [FicheController::class, 'updateProduct'])->name('fiche.updateProduct');
         Route::get('fiche/{id}/action/{action}/{route?}', [FicheController::class, 'action'])->name('fiche.action');
 
         Route::post('product', [ProduitController::class, 'store'])->name('product.store');

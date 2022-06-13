@@ -58,7 +58,11 @@
                                             <td>{{ $produit->categorie }}</td>
                                             <td>{{ $produit->condition }}</td>
                                             <td>{{ $produit->quantite }}</td>
-                                            <td>{{ $produit->expiration }}</td>
+                                            @if ($fiche->status == 'validated' || $fiche->status == 'solved')
+                                                <td>{{ $produit->expiration }}</td>
+                                            @else
+                                                <td>-</td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>
