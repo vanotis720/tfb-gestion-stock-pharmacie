@@ -16,6 +16,7 @@ class Produit extends Model
         'condition',
         'quantite',
         'fiches_id',
+        'expiration'
     ];
 
     public static function getByFiche($fiche)

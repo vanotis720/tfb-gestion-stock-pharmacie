@@ -46,6 +46,7 @@
                                     <th>Categorie</th>
                                     <th>Condition</th>
                                     <th>Quantite</th>
+                                    <th>Expiration</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($products as $produit)
@@ -57,6 +58,7 @@
                                             <td>{{ $produit->categorie }}</td>
                                             <td>{{ $produit->condition }}</td>
                                             <td>{{ $produit->quantite }}</td>
+                                            <td>{{ $produit->expiration }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
