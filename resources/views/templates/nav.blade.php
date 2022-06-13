@@ -18,6 +18,21 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navigation">
             <ul class="navbar-nav">
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" id="notification">
+                        <i class="nc-icon nc-bell-55"></i>
+                        <span class="notification">5</span>
+                        <span class="d-lg-none">Notification</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="notification">
+                        <a class="dropdown-item" href="#">Notification 1</a>
+                        <a class="dropdown-item" href="#">Notification 2</a>
+                        <a class="dropdown-item" href="#">Notification 3</a>
+                        <a class="dropdown-item" href="#">Notification 4</a>
+                        <a class="dropdown-item" href="#">Notification 5</a>
+                    </ul>
+                </li>
                 <li class="nav-item btn-rotate dropdown">
                     <a class="nav-link dropdown-toggle" href="{{ route('account') }}" id="navbarDropdownMenuLink"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
