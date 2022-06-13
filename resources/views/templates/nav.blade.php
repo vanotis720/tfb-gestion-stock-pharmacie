@@ -22,15 +22,13 @@
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false" id="notification">
                         <i class="nc-icon nc-bell-55"></i>
-                        <span class="notification">5</span>
+                        <span class="notification">{{ $notification->count() }}</span>
                         <span class="d-lg-none">Notification</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="notification">
-                        <a class="dropdown-item" href="#">Notification 1</a>
-                        <a class="dropdown-item" href="#">Notification 2</a>
-                        <a class="dropdown-item" href="#">Notification 3</a>
-                        <a class="dropdown-item" href="#">Notification 4</a>
-                        <a class="dropdown-item" href="#">Notification 5</a>
+                        @foreach ($notification as $item)
+                            <a class="dropdown-item" href="#">{{ $item->nom }} : Expiration le {{ $item->expiration }}</a>
+                        @endforeach
                     </ul>
                 </li>
                 <li class="nav-item btn-rotate dropdown">
