@@ -22,13 +22,28 @@
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false" id="notification">
                         <i class="nc-icon nc-bell-55"></i>
-                        <span class="notification">{{ $notification->count() }}</span>
+                        <span class="notification">{{ App\Models\Produit::checkExpiration()->count() }}</span>
                         <span class="d-lg-none">Notification</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="notification">
-                        @foreach ($notification as $item)
-                            <a class="dropdown-item" href="#">{{ $item->nom }} : Expiration le {{ $item->expiration }}</a>
-                        @endforeach
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <td>Produit</td>
+                                    <td>Expiration</td>
+                                    <td>Quantite</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (App\Models\Produit::checkExpiration() as $item)
+                                    <tr>
+                                        <td>{{ $item->nom }}</td>
+                                        <td>{{ $item->expiration }}</td>
+                                        <td>{{ $item->quantite }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </ul>
                 </li>
                 <li class="nav-item btn-rotate dropdown">

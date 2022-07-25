@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::where('isDeleted', 0)->get();
         return view('users.users', compact('users'));
     }
 
@@ -52,8 +52,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
+        $user->isDeleted = 1;
 
-        if ($user->delete()) {
+        if ($user->save()) {
             return redirect()->back()->withSuccess('L\'utilisateur a été supprimé');
         }
         return redirect()->back()->withError('une erreur s\'est produite, veuillez reessayer!');

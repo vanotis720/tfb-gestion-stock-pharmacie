@@ -32,7 +32,8 @@ class ProduitController extends Controller
             'quantite' => 'required',
             'fiches_id' => 'required',
         ]);
-        $produit = Produit::create($validatedData);
+
+        $produit = Produit::create($validatedData + ['init_quantity' => $request->quantite]);
 
         if ($produit) {
             return redirect()->route('fiche.create', $request->fiches_id)->withSuccess('Produit ajouté a la fiche avec success');
@@ -59,7 +60,6 @@ class ProduitController extends Controller
      */
     public function edit(Produit $produit)
     {
-        
     }
 
     /**

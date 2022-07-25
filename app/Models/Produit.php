@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,7 +17,8 @@ class Produit extends Model
         'condition',
         'quantite',
         'fiches_id',
-        'expiration'
+        'expiration',
+        'init_quantity'
     ];
 
     public static function getByFiche($fiche)
@@ -73,7 +75,12 @@ class Produit extends Model
 
     public static function getQuantity($id)
     {
-        // dd($id);
         return (self::find($id))->quantite;
+    }
+
+    public static function checkExpiration()
+    {
+        return Produit::where('quantite', '<', 'init_quantity')
+            ->get();
     }
 }
