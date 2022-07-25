@@ -80,7 +80,6 @@ class Produit extends Model
 
     public static function checkExpiration()
     {
-        return Produit::where('quantite', '<', 'init_quantity')
-            ->get();
+        return Produit::where('quantite', '<=', 'init_quantity')->get();
     }
 }
